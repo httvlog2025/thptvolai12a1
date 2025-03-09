@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tập thể các bạn nam lớp 12A1</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            font-family: 'Arial', sans-serif;
+        }
+        .card-container {
+            perspective: 1000px;
+        }
+        .card {
+            width: 320px;
+            height: 220px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+        }
+        .card.open {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            text-align: justify;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 20px;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+        .card-front {
+            background: #ff4081;
+            cursor: pointer;
+            text-align: center;
+        }
+        .card-back {
+            background: url('https://i.imgur.com/XD1KTBb.jpeg') no-repeat center center/cover;
+            transform: rotateY(180deg);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: black;
+        }
+        .btn {
+            position: absolute;
+            bottom: 10px;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .video-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        .video-popup video {
+            width: 80%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        @keyframes glitter {
+            0% { text-shadow: 0 0 5px #fff, 0 0 10px #ff4081, 0 0 20px #ff4081; }
+            50% { text-shadow: 0 0 10px #fff, 0 0 20px #ff79b0, 0 0 30px #ff79b0; }
+            100% { text-shadow: 0 0 5px #fff, 0 0 10px #ff4081, 0 0 20px #ff4081; }
+        }
+        .glow-text {
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            animation: glitter 1.5s infinite alternate;
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="card" id="card" onclick="openCard()">
+            <div class="card-front glow-text"> GỬI CÔ VÀ CÁC BẠN NỮ LỚP 12A1 💖</div>
+            <div class="card-back">
+                <button class="btn" onclick="showVideo(event)">💝 Nhận quà 💝</button>
+            </div>
+        </div>
+    </div>
+    <div class="video-popup" id="videoPopup">
+        <button class="close-btn" onclick="hideVideo()">Đóng</button>
+        <video id="giftVideo" controls>
+            <source src="https://i.imgur.com/caJWur5.mp4" type="video/mp4">
+            Trình duyệt của bạn không hỗ trợ video.
+        </video>
+    </div>
+    <script>
+        function openCard() {
+            document.getElementById("card").classList.toggle("open");
+        }
+        function showVideo(event) {
+            event.stopPropagation();
+            let popup = document.getElementById("videoPopup");
+            let video = document.getElementById("giftVideo");
+            popup.style.display = "flex";
+            video.play();
+        }
+        function hideVideo() {
+            let popup = document.getElementById("videoPopup");
+            let video = document.getElementById("giftVideo");
+            popup.style.display = "none";
+            video.pause();
+            video.currentTime = 0;
+        }
+    </script>
+</body>
+</html>
